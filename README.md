@@ -1,0 +1,3 @@
+# Code
+Multiple projects: electron apps, bash scripts, ...
+ Executing bash scripts through electron GUI - some experiments
