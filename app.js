@@ -1,6 +1,6 @@
 
 var exec = require('child_process').exec;
-var cmd = './mytouch.sh';
+var cmd = './mytouch.sh urubu';
 // const manageWindowBtn = document.getElementById('manage');
 // manageWindowBtn.addEventListener('click', function (event) {
 //
@@ -28,6 +28,18 @@ function readyFn( jQuery ) {
     exec(cmd, function(error, stdout, stderr) {
     //   // command output is in stdout
     console.log(stdout);
-    // //  console.log(stderr);
+    console.log(stderr);
     })
+
+    const ipc = require('electron').ipcRenderer
+
+    const selectDirBtn = document.getElementById('select-directory')
+
+    selectDirBtn.addEventListener('click', function (event) {
+        ipc.send('open-file-dialog')
+      })
+
+    ipc.on('selected-directory', function (event, path) {
+        document.getElementById('selected-file').innerHTML = `You selected: ${path}`
+      })
 };
