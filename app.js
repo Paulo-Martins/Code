@@ -24,6 +24,7 @@ $( document ).ready( readyFn );
 
 
 function readyFn( jQuery ) {
+    ipc.send('open-file-dialog')
     // Code to run when the document is ready.
     exec(cmd, function(error, stdout, stderr) {
     //   // command output is in stdout
