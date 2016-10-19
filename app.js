@@ -1,6 +1,7 @@
 
 var exec = require('child_process').exec;
 var cmd = './mytouch.sh urubu';
+const ipc = require('electron').ipcRenderer
 // const manageWindowBtn = document.getElementById('manage');
 // manageWindowBtn.addEventListener('click', function (event) {
 //
@@ -24,7 +25,7 @@ $( document ).ready( readyFn );
 
 
 function readyFn( jQuery ) {
-    ipc.send('open-file-dialog')
+    ipc.send('check-sudo');
     // Code to run when the document is ready.
     exec(cmd, function(error, stdout, stderr) {
     //   // command output is in stdout
@@ -32,7 +33,7 @@ function readyFn( jQuery ) {
     console.log(stderr);
     })
 
-    const ipc = require('electron').ipcRenderer
+
 
     const selectDirBtn = document.getElementById('select-directory')
 
@@ -43,4 +44,8 @@ function readyFn( jQuery ) {
     ipc.on('selected-directory', function (event, path) {
         document.getElementById('selected-file').innerHTML = `You selected: ${path}`
       })
+
+      ipc.on('is-not-sudo', function (event, sudo) {
+          document.getElementById('sudo').innerHTML = `sudo é: ${sudo}`
+        })
 };
